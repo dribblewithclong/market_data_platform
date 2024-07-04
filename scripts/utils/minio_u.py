@@ -51,7 +51,7 @@ class MinioUtils:
         self,
         file_path: str,
         sandbox_env: bool = False,
-        bucket_name: str = 'dd-de-bucket',
+        bucket_name: str = 'sandbox',
     ) -> list:
         objects = self.client.list_objects(
             bucket_name=bucket_name,
@@ -68,7 +68,7 @@ class MinioUtils:
         self,
         file_path: str,
         sandbox_env: bool = False,
-        bucket_name: str = 'dd-de-bucket',
+        bucket_name: str = 'sandbox',
     ) -> int:
         rows = 0
 
@@ -107,7 +107,7 @@ class MinioUtils:
         file_path: str,
         file_name: str,
         sandbox_env: bool = False,
-        bucket_name: str = 'dd-de-bucket',
+        bucket_name: str = 'sandbox',
     ) -> bool:
         """
         Check if the data file exists in a directory
@@ -119,7 +119,7 @@ class MinioUtils:
             in sandbox directory (dev mode)
             defaults to False
         :param bucket_name: the name of the bucket to check
-            defaults to 'dd-de-bucket'
+            defaults to 'sandbox'
 
         :return: True if the data file exists
             otherwise False
@@ -142,7 +142,7 @@ class MinioUtils:
         file_path: str,
         file_name: str,
         sandbox_env: bool = False,
-        bucket_name: str = 'dd-de-bucket',
+        bucket_name: str = 'sandbox',
     ) -> None:
         """
         Load data from dataframe to storage
@@ -156,7 +156,7 @@ class MinioUtils:
             defaults to False
         :param bucket_name: the name of the bucket
             to load the data
-            defaults to 'dd-de-bucket'
+            defaults to 'sandbox'
         """
 
         parquet_data = data.to_parquet(index=False)
@@ -180,7 +180,7 @@ class MinioUtils:
         file_path: str,
         file_name: str,
         sandbox_env: bool = False,
-        bucket_name: str = 'dd-de-bucket',
+        bucket_name: str = 'sandbox',
     ) -> pd.DataFrame:
         """
         Get data from a single file of directory of storage
@@ -193,7 +193,7 @@ class MinioUtils:
             defaults to False
         :param bucket_name: the name of the bucket
             to get the data
-            defaults to 'dd-de-bucket'
+            defaults to 'sandbox'
 
         :return: dataframe contains data to get
         """
@@ -213,7 +213,7 @@ class MinioUtils:
         self,
         file_path: str,
         sandbox_env: bool = False,
-        bucket_name: str = 'dd-de-bucket',
+        bucket_name: str = 'sandbox',
     ) -> pd.DataFrame:
         """
         Get data from multiple files of directories of storage
@@ -224,7 +224,7 @@ class MinioUtils:
             defaults to False
         :param bucket_name: the name of the bucket
             to get the data
-            defaults to 'dd-de-bucket'
+            defaults to 'sandbox'
 
         :return: dataframe contains data to get
         """
@@ -271,7 +271,7 @@ class MinioUtils:
         columns: list,
         file_path: str,
         sandbox_env: bool = False,
-        bucket_name: str = 'dd-de-bucket',
+        bucket_name: str = 'sandbox',
     ) -> tuple:
         distinct_val = tuple()
 
