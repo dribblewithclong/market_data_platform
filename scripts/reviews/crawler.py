@@ -142,8 +142,10 @@ class AMZReview(object):
     def __init__(
         self,
         num_worker: int,
+        rundate_path: str,
         country: str = 'USA',
     ) -> None:
+        self.rundate_path = rundate_path
         self.bucket = 'raw'
         self.current_dir = os.path.dirname(__file__)
         self.config_dir = self.current_dir.replace(
@@ -179,8 +181,7 @@ class AMZReview(object):
         )
         # path for data storage
         self.saving_path = (
-            f"amz/review/{self.country}/{self.run_time.year}/"
-            f"{self.run_time.month}/{self.run_time.day}"
+            f"amz/review/{self.country}/{self.rundate_path}"
         )
         # minIO utils
         self.minio = MinioUtils(
@@ -907,6 +908,7 @@ class AMZReview(object):
 if __name__ == "__main__":
     job = AMZReview(
         num_worker=7,
+        rundate_path='2024/07/04',
         country='USA',
     )
 
