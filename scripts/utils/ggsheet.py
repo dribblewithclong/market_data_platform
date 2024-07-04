@@ -4,7 +4,7 @@ import warnings
 from typing import Callable
 import pandas as pd
 import gspread
-# from gspread_dataframe import set_with_dataframe
+from gspread_dataframe import set_with_dataframe
 
 warnings.filterwarnings("ignore", category=UserWarning)
 
@@ -447,87 +447,87 @@ class GGSheetUtils:
             value_input_option=input_option,
         )
 
-    # def gspread_load_data(
-    #     self,
-    #     data: pd.DataFrame,
-    #     sheet_id: str,
-    #     sheet_name: str = 'Sheet1',
-    #     from_row: int = 1,
-    #     from_col: int = 1,
-    #     include_index: bool = False,
-    #     include_column: bool = True,
-    #     resize_worksheet: bool = False,
-    #     allow_formulas: bool = True,
-    #     string_escaping: str = 'default',
-    # ) -> None:
-    #     """
-    #     Load data to the given sheet. This method
-    #     is integrated with GSpread load data function
-    #     that provides the high efficiency and convenience,
-    #     it can be used as the alternative of two methods
-    #     'insert_data' and 'update_data'
+    def gspread_load_data(
+        self,
+        data: pd.DataFrame,
+        sheet_id: str,
+        sheet_name: str = 'Sheet1',
+        from_row: int = 1,
+        from_col: int = 1,
+        include_index: bool = False,
+        include_column: bool = True,
+        resize_worksheet: bool = False,
+        allow_formulas: bool = True,
+        string_escaping: str = 'default',
+    ) -> None:
+        """
+        Load data to the given sheet. This method
+        is integrated with GSpread load data function
+        that provides the high efficiency and convenience,
+        it can be used as the alternative of two methods
+        'insert_data' and 'update_data'
 
-    #     :param data: dataframe contains data to load
-    #     :param sheet_id: spreadsheet name
-    #     :param sheet_name: worksheet name
-    #         defaults to 'Sheet1'
-    #     :param from_row: row at which to start loading the DataFrame
-    #         defaults to 1
-    #     :param from_col: column at which to start loading the DataFrame
-    #         defaults to 1
-    #     :param include_index: if True, include the DataFrame's index as an
-    #         additional column
-    #         defaults to False
-    #     :param include_column: if True, add a header row or rows before data
-    #         with column names (if include_index is True, the index's name(s)
-    #         will be used as its columns' headers)
-    #         defaults to True
-    #     :param resize_worksheet: if True, changes the worksheet's
-    #         size to match the shape of the provided DataFrame,
-    #         if False, worksheet will only be
-    #         resized as necessary to contain the DataFrame contents
-    #         defaults to False
-    #     :param allow_formulas: if True, interprets `=foo` as a formula in
-    #         cell values; otherwise all text beginning with `=` is escaped
-    #         to avoid its interpretation as a formula
-    #         defaults to True
-    #     :param string_escaping: determines when string values are
-    #         escaped as text literals (by adding an initial `'` character)
-    #         in requests to Sheets API
-    #         4 parameter values are accepted:
-    #         - 'default': only escape strings starting with a literal `'`
-    #             character
-    #         - 'off': escape nothing; cell values starting with a `'` will be
-    #             interpreted by sheets as an escape character followed by
-    #             a text literal
-    #         - 'full': escape all string values
-    #         - any callable object: will be called once for each cell's string
-    #             value; if return value is true, string will be escaped
-    #             with preceding `'` (A useful technique is to pass a
-    #             regular expression bound method, e.g.
-    #             `re.compile(r'^my_regex_.*$').search`.)
-    #         the escaping done when allow_formulas=False (escaping string values
-    #         beginning with `=`) is unaffected by this parameter's value
-    #         defaults to 'default'
-    #     """
+        :param data: dataframe contains data to load
+        :param sheet_id: spreadsheet name
+        :param sheet_name: worksheet name
+            defaults to 'Sheet1'
+        :param from_row: row at which to start loading the DataFrame
+            defaults to 1
+        :param from_col: column at which to start loading the DataFrame
+            defaults to 1
+        :param include_index: if True, include the DataFrame's index as an
+            additional column
+            defaults to False
+        :param include_column: if True, add a header row or rows before data
+            with column names (if include_index is True, the index's name(s)
+            will be used as its columns' headers)
+            defaults to True
+        :param resize_worksheet: if True, changes the worksheet's
+            size to match the shape of the provided DataFrame,
+            if False, worksheet will only be
+            resized as necessary to contain the DataFrame contents
+            defaults to False
+        :param allow_formulas: if True, interprets `=foo` as a formula in
+            cell values; otherwise all text beginning with `=` is escaped
+            to avoid its interpretation as a formula
+            defaults to True
+        :param string_escaping: determines when string values are
+            escaped as text literals (by adding an initial `'` character)
+            in requests to Sheets API
+            4 parameter values are accepted:
+            - 'default': only escape strings starting with a literal `'`
+                character
+            - 'off': escape nothing; cell values starting with a `'` will be
+                interpreted by sheets as an escape character followed by
+                a text literal
+            - 'full': escape all string values
+            - any callable object: will be called once for each cell's string
+                value; if return value is true, string will be escaped
+                with preceding `'` (A useful technique is to pass a
+                regular expression bound method, e.g.
+                `re.compile(r'^my_regex_.*$').search`.)
+            the escaping done when allow_formulas=False (escaping string values
+            beginning with `=`) is unaffected by this parameter's value
+            defaults to 'default'
+        """
 
-    #     spreadsheet = self.open_spread_sheet(sheet_id)
-    #     worksheet = self.get_work_sheet(
-    #         spreadsheet,
-    #         sheet_name,
-    #     )
+        spreadsheet = self.open_spread_sheet(sheet_id)
+        worksheet = self.get_work_sheet(
+            spreadsheet,
+            sheet_name,
+        )
 
-    #     set_with_dataframe(
-    #         worksheet=worksheet,
-    #         dataframe=data,
-    #         row=from_row,
-    #         col=from_col,
-    #         include_index=include_index,
-    #         include_column_header=include_column,
-    #         resize=resize_worksheet,
-    #         allow_formulas=allow_formulas,
-    #         string_escaping=string_escaping,
-    #     )
+        set_with_dataframe(
+            worksheet=worksheet,
+            dataframe=data,
+            row=from_row,
+            col=from_col,
+            include_index=include_index,
+            include_column_header=include_column,
+            resize=resize_worksheet,
+            allow_formulas=allow_formulas,
+            string_escaping=string_escaping,
+        )
 
     def remove_data(
         self,
