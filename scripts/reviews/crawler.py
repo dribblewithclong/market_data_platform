@@ -168,8 +168,7 @@ class AMZReview(object):
         self.local_context = threading.local()
         # number worker for multithread
         self.num_worker = num_worker
-        # get processed asins for not re-crawling
-        self.processed_asins = ["a function will be here"]     # TODO
+
         self.logging = Logger(
             name=__name__,
             path=f"{self.current_dir}/logs/"
