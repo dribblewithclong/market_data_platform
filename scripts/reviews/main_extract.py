@@ -90,6 +90,8 @@ class AMZReviewExtract:
 
     def main(self) -> None:
         asins = self.get_asins()
+        print(f'Total asins to crawl: {len(asins)}')
+        print(f'on {self.rundate_path}')
         num_worker = min(
             len(asins),
             7,
