@@ -144,7 +144,7 @@ class AMZReview(object):
         num_worker: int,
         country: str = 'USA',
     ) -> None:
-        self.sandbox_env = True
+        self.bucket = 'raw'
         self.current_dir = os.path.dirname(__file__)
         self.config_dir = self.current_dir.replace(
             'reviews',
@@ -196,7 +196,7 @@ class AMZReview(object):
         return self.minio.data_exist(
             file_path=self.saving_path,
             file_name=asin,
-            sandbox_env=self.sandbox_env,
+            bucket_name=self.bucket,
         )
 
     def _generate_driver(self) -> AMZDriver:
@@ -808,7 +808,7 @@ class AMZReview(object):
                 data=df,
                 file_path=path,
                 file_name=asin,
-                sandbox_env=self.sandbox_env,
+                bucket_name=self.bucket,
             )
             return
 
@@ -834,7 +834,7 @@ class AMZReview(object):
             data=df,
             file_path=path,
             file_name=asin,
-            sandbox_env=self.sandbox_env,
+            bucket_name=self.bucket,
         )
 
     def main(
