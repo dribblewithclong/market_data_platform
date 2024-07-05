@@ -917,7 +917,7 @@ class AMZReview(object):
 
 if __name__ == "__main__":
     job = AMZReview(
-        num_worker=7,
+        num_worker=1,
         rundate_path='2024/07/04',
         country='USA',
     )
