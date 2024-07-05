@@ -94,7 +94,7 @@ class AMZReviewExtract:
         print(f'on {self.rundate_path}')
         num_worker = min(
             len(asins),
-            7,
+            5,
         )
 
         crawler = AMZReview(
