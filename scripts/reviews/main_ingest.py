@@ -108,12 +108,17 @@ class AMZReviewExtract:
 if __name__ == '__main__':
     start = time.time()
 
-    rundate_path = gen_rundate_path()
-    job = AMZReviewExtract(
-        'USA',
-        rundate_path,
-    )
-    job.main()
+    # rundate_path = gen_rundate_path()
+    rundate_path = '2024/07/04'
+    for country in [
+        'ESP', 'ITA', 'FRA', 'MEX',
+        'GBR', 'DEU', 'CAN', 'USA',
+    ]:
+        job = AMZReviewExtract(
+            country,
+            rundate_path,
+        )
+        job.main()
 
     end = time.time()
     print(f'Total run time: {end-start}')
