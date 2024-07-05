@@ -557,21 +557,42 @@ class AMZReview(object):
                 attrs={"data-hook": "review-date"}
             ).text.strip()
             if self.country != "USA":
-                review_location_date = translator.translate(
+                try:
+                    review_location_date = translator.translate(
+                        review_location_date
+                    )
+                except Exception:
+                    self.logging.warning(
+                        f'CANNOT TRANSLATE: {review_location_date}'
+                    )
+            try:
+                review_locations.append(
+                    re.findall(
+                        LOCATION_PATTERN,
+                        review_location_date,
+                    )[0]
+                )
+            except Exception:
+                self.logging.warning(
+                    f'CANNOT EXTRACT LOCATION: {review_location_date}'
+                )
+                review_locations.append(
                     review_location_date
                 )
-            review_locations.append(
-                re.findall(
-                    LOCATION_PATTERN,
-                    review_location_date,
-                )[0]
-            )
-            review_dates.append(
-                re.findall(
-                    DATE_PATTERN,
-                    review_location_date,
-                )[0]
-            )
+            try:
+                review_dates.append(
+                    re.findall(
+                        DATE_PATTERN,
+                        review_location_date,
+                    )[0]
+                )
+            except Exception:
+                self.logging.warning(
+                    f'CANNOT EXTRACT DATE: {review_location_date}'
+                )
+                review_dates.append(
+                    review_location_date
+                )
 
         result = {
             "PROFILE_NAME": profile_name,
