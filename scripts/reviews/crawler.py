@@ -18,6 +18,7 @@ from amazoncaptcha import AmazonCaptcha
 from bs4 import BeautifulSoup, SoupStrainer
 import pandas as pd
 import numpy as np
+from deep_translator import GoogleTranslator
 from selenium import webdriver
 from selenium.webdriver.chrome.options \
     import Options
@@ -429,6 +430,11 @@ class AMZReview(object):
             attrs={"data-hook": "review"}
         )
 
+        translator = GoogleTranslator(
+            source='auto',
+            target='en',
+        )
+
         # pattern for regex
         DATE_PATTERN = r"\b[A-Z][a-z]+ \d{1,2}, \d{4}\b"
         LOCATION_PATTERN = (
@@ -550,6 +556,10 @@ class AMZReview(object):
             review_location_date = review.find(
                 attrs={"data-hook": "review-date"}
             ).text.strip()
+            if self.country != "USA":
+                review_location_date = translator.translate(
+                    review_location_date
+                )
             review_locations.append(
                 re.findall(
                     LOCATION_PATTERN,
