@@ -2,8 +2,6 @@ services:
   minion1:
     image: bitnami/minio:2024
     container_name: minio-node-1
-    networks:
-      - dp_network
     environment:
       - MINIO_ROOT_USER=iykyk101
       - MINIO_ROOT_PASSWORD=44oki@iykyk
@@ -22,8 +20,6 @@ services:
   minion2:
     image: bitnami/minio:2024
     container_name: minio-node-2
-    networks:
-      - dp_network
     environment:
       - MINIO_ROOT_USER=iykyk101
       - MINIO_ROOT_PASSWORD=44oki@iykyk
@@ -39,8 +35,6 @@ services:
   minion3:
     image: bitnami/minio:2024
     container_name: minio-node-3
-    networks:
-      - dp_network
     environment:
       - MINIO_ROOT_USER=iykyk101
       - MINIO_ROOT_PASSWORD=44oki@iykyk
@@ -56,8 +50,6 @@ services:
   minion4:
     image: bitnami/minio:2024
     container_name: minio-node-4
-    networks:
-      - dp_network
     environment:
       - MINIO_ROOT_USER=iykyk101
       - MINIO_ROOT_PASSWORD=44oki@iykyk
