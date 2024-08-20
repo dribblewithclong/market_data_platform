@@ -1,7 +1,17 @@
 services:
+  nessie:
+    image: projectnessie/nessie:latest
+    container_name: nessie
+    networks:
+      iceberg:
+    ports:
+      - 19120:19120
+
   minion1:
     image: bitnami/minio:2024
     container_name: minio-node-1
+    networks:
+      - iceberg
     environment:
       - MINIO_ROOT_USER=iykyk101
       - MINIO_ROOT_PASSWORD=44oki@iykyk
@@ -20,6 +30,8 @@ services:
   minion2:
     image: bitnami/minio:2024
     container_name: minio-node-2
+    networks:
+      - iceberg
     environment:
       - MINIO_ROOT_USER=iykyk101
       - MINIO_ROOT_PASSWORD=44oki@iykyk
@@ -35,6 +47,8 @@ services:
   minion3:
     image: bitnami/minio:2024
     container_name: minio-node-3
+    networks:
+      - iceberg
     environment:
       - MINIO_ROOT_USER=iykyk101
       - MINIO_ROOT_PASSWORD=44oki@iykyk
@@ -50,6 +64,8 @@ services:
   minion4:
     image: bitnami/minio:2024
     container_name: minio-node-4
+    networks:
+      - iceberg
     environment:
       - MINIO_ROOT_USER=iykyk101
       - MINIO_ROOT_PASSWORD=44oki@iykyk
@@ -67,3 +83,7 @@ volumes:
   minio_2_data:
   minio_3_data:
   minio_4_data:
+
+networks:
+  iceberg:
+    driver: bridge
