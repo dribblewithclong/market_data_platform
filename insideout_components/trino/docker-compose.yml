@@ -1,0 +1,17 @@
+services:
+  minio:
+    image: trinodb/trino:452
+    container_name: trino
+    ports:
+      - 8180:8080
+    volumes:
+      - ./catalog:/etc/trino/catalog
+      - ./config.properties:/etc/trino/config.properties:ro
+    environment:
+      CATALOG_MANAGEMENT: dynamic
+    networks:
+      - insideout
+
+networks:
+  insideout:
+    external: true
