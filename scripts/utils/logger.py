@@ -10,7 +10,7 @@ DEFAULT_FORMAT = (
 class Logger(logging.Logger):
     def __init__(
         self,
-        name: str,
+        name: str = __name__,
         path: str = None,
         format: str = DEFAULT_FORMAT,
         level: int = 10,
