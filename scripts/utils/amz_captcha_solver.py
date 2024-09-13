@@ -99,6 +99,7 @@ async def solve_captcha_playw(
     captcha_character = page.locator(
         '#captchacharacters'
     )
+    solution = None
     while await captcha_character.count() > 0:
         captcha_url = await page.locator(
             'div[class="a-row a-text-center"]'
@@ -123,5 +124,5 @@ async def solve_captcha_playw(
         captcha_character = page.locator(
             '#captchacharacters'
         )
-
-    print(f'Captcha {solution} solved')
+    if solution:
+        print(f'Captcha {solution} solved')
