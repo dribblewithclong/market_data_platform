@@ -1,7 +1,9 @@
 import random
+import re
 import os
 import pandas as pd
 from collections import deque
+from dotenv import load_dotenv
 
 
 def load_proxies(proxies_path: str) -> list:
@@ -17,6 +19,16 @@ def load_proxies(proxies_path: str) -> list:
 def generate_proxy_html(
     return_dict: bool = False,
 ) -> str:
+    load_dotenv(
+        re.search(
+            f'.*{re.escape("market_data_platform")}',
+            __file__,
+        ).group() + '/.env'
+    )
+    proxy_prefix = os.getenv(
+        'PROXY_PREFIX'
+    )
+
     current_dir = os.path.dirname(__file__)
 
     proxies = load_proxies(
@@ -25,8 +37,7 @@ def generate_proxy_html(
 
     proxy = random.choice(proxies)
     proxy_html = (
-        f"http://team123p-rotate:rxfckevxig2x@"
-        f"{proxy}"
+        f"{proxy_prefix}{proxy}"
     )
     # print(f'proxy used: {proxy}')
 
