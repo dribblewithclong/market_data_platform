@@ -1,6 +1,7 @@
 import os
 import sys
 import re
+import json
 import warnings
 import datetime
 import pytz
@@ -220,6 +221,39 @@ class MinioUtils:
             length=len(html_bytes),
             content_type='html',
         )
+
+    def load_data_json(
+        self,
+        data: dict,
+        file_path: str,
+        file_name: str,
+        bucket_name: str = 'lakehouse',
+    ) -> None:
+        data_str = json.dumps(data)
+        html_bytes = data_str.encode('utf-8')
+
+        self.client.put_object(
+            bucket_name=bucket_name,
+            object_name=f'{file_path}/{file_name}.json',
+            data=BytesIO(html_bytes),
+            length=len(html_bytes),
+            content_type='html',
+        )
+
+    def get_data_json(
+        self,
+        file_path: str,
+        file_name: str,
+        bucket_name: str = 'lakehouse',
+    ) -> dict:
+        data = json.loads(
+            self.client.get_object(
+                bucket_name=bucket_name,
+                object_name=f'{file_path}/{file_name}.json',
+            ).data.decode('utf-8')
+        )
+
+        return data
 
     def get_data(
         self,
