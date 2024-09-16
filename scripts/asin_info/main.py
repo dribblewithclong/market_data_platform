@@ -25,10 +25,10 @@ from scripts.utils.telegram_alert \
 from scripts.utils.ggsheet \
     import GGSheetUtils                     # noqa: E402
 from scripts.asin_info.scraper \
-    import AsinInfo                         # noqa: E402
+    import AsinInfoScraper                         # noqa: E402
 
 
-class AsinInfoExtract:
+class AsinInfo:
     def __init__(
         self,
         rundate_path: str,
@@ -72,7 +72,7 @@ class AsinInfoExtract:
 
     def retrieve_params(self) -> list:
         asins = self.get_asins()
-        asins_already = AsinInfo(
+        asins_already = AsinInfoScraper(
             input_li=[],
             rundate_path=self.rundate_path,
             info_type='asin_info',
@@ -98,10 +98,10 @@ class AsinInfoExtract:
         return params
 
     def main(self) -> None:
-
+        # Scrape data
         params = self.retrieve_params()
 
-        ainfo = AsinInfo(
+        ainfo = AsinInfoScraper(
             input_li=params,
             rundate_path=self.rundate_path,
             info_type='asin_info',
@@ -126,7 +126,7 @@ if __name__ == '__main__':
         '%Y/%m/%d'
     )
 
-    j = AsinInfoExtract(rundate_path)
+    j = AsinInfo(rundate_path)
     j.main()
 
     send_message(

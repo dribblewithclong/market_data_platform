@@ -34,7 +34,7 @@ from scripts.utils.retrieve_cookies \
     import _executor as gen_cookies_by_zipcode     # noqa: E402
 
 
-class AsinInfo:
+class AsinInfoScraper:
     def __init__(
         self,
         input_li: list,
