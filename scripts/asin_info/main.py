@@ -64,7 +64,7 @@ class AsinInfo:
             sheet_id=os.getenv('ASIN_SHEET_ID'),
             sheet_name='us',
             range_from='A1',
-            range_to='A100',
+            range_to='A',
             columns_first_row=True,
         )
 
