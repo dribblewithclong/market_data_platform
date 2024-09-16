@@ -25,7 +25,7 @@ from scripts.utils.telegram_alert \
 from scripts.utils.ggsheet \
     import GGSheetUtils                     # noqa: E402
 from scripts.asin_info.scraper \
-    import AsinInfoScraper                         # noqa: E402
+    import AsinInfoScraper                  # noqa: E402
 
 
 class AsinInfo:
@@ -64,9 +64,12 @@ class AsinInfo:
             sheet_id=os.getenv('ASIN_SHEET_ID'),
             sheet_name='us',
             range_from='A1',
-            range_to='A',
+            range_to='B',
             columns_first_row=True,
         )
+        df = df[
+            df['country'] == 'USA'
+        ].reset_index(drop=True)
 
         return df['asin'].to_list()
 
