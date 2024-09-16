@@ -4,9 +4,12 @@ services:
     container_name: trino
     ports:
       - 8180:8080
+      - 8543:8443
     volumes:
       - ./catalog:/etc/trino/catalog
       - ./config.properties:/etc/trino/config.properties:ro
+      - ./password.db:/etc/trino/password.db:ro
+      - ./password-authenticator.properties:/etc/trino/password-authenticator.properties:ro
     environment:
       CATALOG_MANAGEMENT: dynamic
       MINIO_ROOT_USER: ${MINIO_ACCESS_KEY}
