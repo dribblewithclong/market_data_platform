@@ -3,3 +3,4 @@
 **/.env
 **/log
 **/clickhouse/db
+**/password.db
