@@ -1,5 +1,5 @@
 services:
-  minio:
+  trino:
     image: trinodb/trino:452
     container_name: trino
     ports:
