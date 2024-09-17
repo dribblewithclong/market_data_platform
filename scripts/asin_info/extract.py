@@ -28,7 +28,7 @@ from scripts.asin_info.scraper \
     import AsinInfoScraper                  # noqa: E402
 
 
-class AsinInfo:
+class AsinInfoExtract:
     def __init__(
         self,
         rundate_path: str,
@@ -129,7 +129,7 @@ if __name__ == '__main__':
         '%Y/%m/%d'
     )
 
-    j = AsinInfo(rundate_path)
+    j = AsinInfoExtract(rundate_path)
     j.main()
 
     send_message(
